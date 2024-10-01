@@ -1,0 +1,29 @@
+.userMenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f7f7f7;
+    /* Світло-сірий */
+    border-radius: 5px;
+}
+
+.welcome {
+    font-size: 18px;
+    color: #333;
+}
+
+.logoutButton {
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    /* Червоний */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logoutButton:hover {
+    background-color: #c0392b;
+    /* Темніший червоний */
+}
