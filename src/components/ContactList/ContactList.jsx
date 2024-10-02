@@ -1,17 +1,22 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import { selectVisibleContacts } from "../../redux/contacts/slice";
+import { selectFilteredContacts } from "../../redux/contacts/selectors";
 import Contact from "../Contact/Contact";
-import css from "./ContactList.module.css";
+import css from "./ContactList.module.css"; // Якщо використовуєте стилі
 
 export default function ContactList() {
-  const visibleContacts = useSelector(selectVisibleContacts);
+  const contacts = useSelector(selectFilteredContacts);
+  
+  console.log("Filtered Contacts in ContactList: ", contacts);
 
   return (
     <ul className={css.contactList}>
-      {visibleContacts.map((contact) => (
-        <Contact key={contact.id} contact={contact} />
-      ))}
+      {contacts.length > 0 ? (
+        contacts.map((contact) => (
+          <Contact contact={contact} key={contact.id} />
+        ))
+      ) : (
+        <p>You don't have any contacts yet!</p>
+      )}
     </ul>
   );
 }

@@ -1,7 +1,6 @@
-// src/components/UserMenu/UserMenu.jsx
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../redux/auth/operations";
+import { logOut } from "../../redux/auth/operations"; // Заміна на logOut
 import { selectUser } from "../../redux/auth/selectors";
 import css from "./UserMenu.module.css"; // Зміна імпорту на css
 
@@ -10,7 +9,7 @@ export const UserMenu = () => {
   const user = useSelector(selectUser); // Отримуємо дані користувача
 
   const handleLogout = () => {
-    dispatch(logOut()); // Викликаємо функцію для виходу
+    dispatch(logOut()); // Використовуємо logOut для виходу
   };
 
   return (

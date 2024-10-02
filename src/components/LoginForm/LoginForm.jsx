@@ -1,20 +1,21 @@
-// src/components/LoginForm/LoginForm.jsx
-import { Field, Form, Formik, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import css from "./LoginForm.module.css"; // Імпорт стилів
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { logIn } from "../../redux/auth/operations";
-import { selectAuthError } from "../../redux/auth/selectors"; // Імпорт селектора помилки
+import { selectAuthError } from "../../redux/auth/selectors";
+import css from "./LoginForm.module.css";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const error = useSelector(selectAuthError); // Отримання помилки з Redux
+  const error = useSelector(selectAuthError);
 
   const initialValues = {
     email: "",
     password: "",
   };
 
+  // Валідація форми через Yup
   const loginFormValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required!"),
     password: Yup.string()
@@ -23,8 +24,15 @@ const LoginForm = () => {
       .max(100, "Password must be less than 100 characters"),
   });
 
-  const handleFormSubmit = (values) => {
-    dispatch(logIn(values)); // Відправка даних для логіну
+  const handleFormSubmit = (values, actions) => {
+    dispatch(logIn(values))
+      .unwrap()
+      .then(() => {
+        actions.resetForm(); // Очищення форми після успішного логіну
+      })
+      .catch((error) => {
+        console.error("Login error:", error);
+      });
   };
 
   return (
@@ -65,6 +73,7 @@ const LoginForm = () => {
         <button className={css.submitBtn} type="submit">
           Log In
         </button>
+
         {error && (
           <p className={css.errorText}>Oops, some error occurred... {error}</p>
         )}
@@ -73,4 +82,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginForm; // Експорт за замовчуванням

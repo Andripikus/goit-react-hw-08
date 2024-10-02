@@ -1,5 +1,7 @@
 import React from "react";
 import css from "./Contact.module.css";
+import { MdPhone } from "react-icons/md";
+import { IoPerson } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
 
@@ -11,16 +13,20 @@ export default function Contact({ contact: { name, number, id } }) {
   };
 
   return (
-    <li className={css.contactItem}>
-      <div className={css.contactInfo}>
-        <span>{name}</span>
+    <div className={css.contactBox}>
+      <div>
+        <div className={css.nameBox}>
+          <IoPerson style={{ width: 20, height: 20 }} />
+          <p>{name}</p>
+        </div>
+        <div className={css.contactData}>
+          <MdPhone style={{ width: 20, height: 20 }} />
+          <p>{number}</p>
+        </div>
       </div>
-      <div className={css.contactInfo}>
-        <span>{number}</span>
-      </div>
-      <button className={css.button} onClick={handleDelete}>
+      <button className={css.btnDelete} onClick={handleDelete}>
         Delete
       </button>
-    </li>
+    </div>
   );
 }

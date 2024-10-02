@@ -1,4 +1,3 @@
-// src/redux/auth/operations.js
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -6,12 +5,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 axios.defaults.baseURL = "https://connections-api.goit.global/";
 
 // ** Додаємо JWT до заголовків
-const setAuthHeader = (token) => {
+export const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 // ** Видаляємо JWT із заголовків
-const clearAuthHeader = () => {
+export const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = "";
 };
 
@@ -24,13 +23,11 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      // Відправляємо запит на реєстрацію
       const res = await axios.post("/users/signup", credentials);
-      // Встановлюємо токен у заголовки для подальших запитів
-      setAuthHeader(res.data.token);
-      return res.data; // Повертаємо відповідь від сервера
+      const token = res.data.token;
+      setAuthHeader(token); // Встановлюємо токен після реєстрації
+      return res.data;
     } catch (error) {
-      // В разі помилки повертаємо повідомлення про помилку
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -42,16 +39,14 @@ export const register = createAsyncThunk(
  * Операція логіну користувача
  */
 export const logIn = createAsyncThunk(
-  "auth/login",
+  "auth/logIn",
   async (credentials, thunkAPI) => {
     try {
-      // Відправляємо запит на логін
       const res = await axios.post("/users/login", credentials);
-      // Встановлюємо токен у заголовки
-      setAuthHeader(res.data.token);
-      return res.data; // Повертаємо відповідь від сервера
+      const token = res.data.token;
+      setAuthHeader(token); // Встановлюємо токен після логіну
+      return res.data;
     } catch (error) {
-      // В разі помилки повертаємо повідомлення про помилку
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -62,14 +57,11 @@ export const logIn = createAsyncThunk(
  * headers: Authorization: Bearer token
  * Операція виходу з системи
  */
-export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+export const logOut = createAsyncThunk("auth/logOut", async (_, thunkAPI) => {
   try {
-    // Відправляємо запит на вихід
     await axios.post("/users/logout");
-    // Видаляємо токен із заголовків
-    clearAuthHeader();
+    clearAuthHeader(); // Видаляємо токен після логауту
   } catch (error) {
-    // В разі помилки повертаємо повідомлення про помилку
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -82,24 +74,20 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState(); // Отримуємо поточний стан Redux
-
     try {
-      // Встановлюємо токен із збереженого стану
-      setAuthHeader(state.auth.token);
-      // Відправляємо запит на отримання поточного користувача
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+      setAuthHeader(token); // Встановлюємо токен
       const resp = await axios.get("/users/current");
-      return resp.data; // Повертаємо дані користувача
+      return resp.data;
     } catch (error) {
-      // В разі помилки повертаємо повідомлення про помилку
       return thunkAPI.rejectWithValue(error.message);
     }
   },
   {
-    // Виконуємо перевірку перед виконанням запиту
     condition: (_, thunkAPI) => {
       const state = thunkAPI.getState();
-      // Якщо токен відсутній, запит не виконується
+      // Якщо токену немає, не робимо запит
       return state.auth.token !== null;
     },
   }

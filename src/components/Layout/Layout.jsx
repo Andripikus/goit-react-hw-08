@@ -1,14 +1,15 @@
 // src/components/Layout/Layout.jsx
 import { Suspense } from "react";
-import { AppBar } from "../AppBar/AppBar"; // Іменований експорт
+import { AppBar } from "../AppBar/AppBar";
+import css from "./Layout.module.css";
 
-export const Layout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
-    <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 16px" }}>
+    <div className={css.container}>
       <AppBar />
-      <Suspense fallback={null}>
-        {children}
-      </Suspense>
+      <Suspense fallback={null}>{children}</Suspense>
     </div>
   );
 };
+
+export default Layout;

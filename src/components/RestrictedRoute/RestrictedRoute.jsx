@@ -9,4 +9,4 @@ const RestrictedRoute = ({ component, redirectTo }) => {
   return isLoggedIn === true ? <Navigate to={redirectTo} /> : component; // Умовний рендеринг
 };
 
-export default RestrictedRoute; // Додаємо експорт за замовчуванням
+export default RestrictedRoute; // Експорт за замовчуванням

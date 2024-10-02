@@ -13,8 +13,8 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import contactsReducer from "./contacts/slice";
-import filtersReducer from "./filter/slice";
-import { authReducer } from "./auth/slice"; // Виправлено імпорт
+import filtersReducer from "./filter/slice"; // Виправлено імпорт
+import authReducer from "./auth/slice"; // Імпорт за замовчуванням
 
 const persistConfig = {
   key: "auth-jwc",
