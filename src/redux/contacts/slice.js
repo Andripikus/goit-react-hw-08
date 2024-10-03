@@ -2,7 +2,6 @@ import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
 import { logOut } from "../auth/operations";
 
-
 const initialState = {
   items: [],
   loading: false,
@@ -22,17 +21,17 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items = [...state.items, action.payload]; // Додаємо контакт до списку
+        state.items = [...state.items, action.payload];
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.items = state.items.filter(
-          (contact) => contact.id !== action.payload // Фільтруємо контакти
+          (contact) => contact.id !== action.payload
         );
       })
       .addCase(logOut.fulfilled, (state) => {
-        state.items = []; // Очищаємо контакти при логауті
+        state.items = [];
       })
       .addMatcher(
         isAnyOf(
@@ -52,7 +51,7 @@ const contactsSlice = createSlice({
         ),
         (state, action) => {
           state.loading = false;
-          state.error = action.payload; // Обробляємо помилки
+          state.error = action.payload;
         }
       );
   },

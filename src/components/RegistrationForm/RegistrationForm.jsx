@@ -3,10 +3,9 @@ import { useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { register } from "../../redux/auth/operations";
-import { selectAuthError } from "../../redux/auth/selectors"; // Для обробки помилок
+import { selectAuthError } from "../../redux/auth/selectors";
 import css from "./RegistrationForm.module.css";
 
-// Схема валідації через Yup
 const RegisterFormValidationSchema = Yup.object().shape({
   name: Yup.string()
     .required("Name is required!")
@@ -21,7 +20,7 @@ const RegisterFormValidationSchema = Yup.object().shape({
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
-  const error = useSelector(selectAuthError); // Отримання помилки з Redux
+  const error = useSelector(selectAuthError);
 
   const initialValues = { name: "", email: "", password: "" };
 
@@ -33,11 +32,11 @@ export const RegistrationForm = () => {
     dispatch(register(values))
       .unwrap()
       .then(() => {
-        actions.resetForm(); // Скидання форми після успішної реєстрації
+        actions.resetForm();
       })
       .catch((err) => {
         console.error("Registration error:", err);
-        alert(err); // Виведення помилки користувачеві
+        alert(err);
       });
   };
 
@@ -45,7 +44,7 @@ export const RegistrationForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={handleRegister}
-      validationSchema={RegisterFormValidationSchema} // Підключення схеми валідації
+      validationSchema={RegisterFormValidationSchema}
     >
       <Form className={css.form}>
         <label htmlFor={nameFieldId} className={css.label}>
@@ -81,7 +80,11 @@ export const RegistrationForm = () => {
           id={passwordFieldId}
           className={css.input}
         />
-        <ErrorMessage name="password" component="div" className={css.errorText} />
+        <ErrorMessage
+          name="password"
+          component="div"
+          className={css.errorText}
+        />
 
         <button className={css.btn} type="submit">
           Register

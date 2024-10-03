@@ -1,4 +1,3 @@
-// src/redux/store.js
 import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
@@ -13,8 +12,8 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import contactsReducer from "./contacts/slice";
-import filtersReducer from "./filter/slice"; // Виправлено імпорт
-import authReducer from "./auth/slice"; // Імпорт за замовчуванням
+import filtersReducer from "./filter/slice";
+import authReducer from "./auth/slice";
 
 const persistConfig = {
   key: "auth-jwc",

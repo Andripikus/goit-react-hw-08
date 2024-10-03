@@ -1,10 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Встановлюємо базову URL-адресу для запитів
 axios.defaults.baseURL = "https://connections-api.goit.global";
 
-// Отримати всі контакти
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",
   async (_, thunkAPI) => {
@@ -16,15 +14,13 @@ export const fetchContacts = createAsyncThunk(
     }
   },
   {
-    // Перевірка чи користувач залогінений перед виконанням запиту
     condition: (_, thunkAPI) => {
       const state = thunkAPI.getState();
-      return state.auth.isLoggedIn === true; // Запит виконується, якщо користувач залогінений
+      return state.auth.isLoggedIn === true;
     },
   }
 );
 
-// Додати новий контакт
 export const addContact = createAsyncThunk(
   "contacts/addContact",
   async (contact, thunkAPI) => {
@@ -37,13 +33,12 @@ export const addContact = createAsyncThunk(
   }
 );
 
-// Видалити контакт
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (contactId, thunkAPI) => {
     try {
       const respons = await axios.delete(`/contacts/${contactId}`);
-      return contactId; // Повертаємо ID видаленого контакту
+      return contactId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -1,29 +1,29 @@
 .userMenu {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #f7f7f7;
-    /* Світло-сірий */
-    border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #666666;
 }
 
 .welcome {
-    font-size: 18px;
-    color: #333;
+  margin-right: 20px;
+  font-size: 18px;
+  color: #dbdbdb;
+  font-weight: 500;
 }
 
 .logoutButton {
-    padding: 5px 10px;
-    background-color: #e74c3c;
-    /* Червоний */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .logoutButton:hover {
-    background-color: #c0392b;
-    /* Темніший червоний */
+  background-color: #d32f2f;
 }

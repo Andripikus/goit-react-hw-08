@@ -1,14 +1,28 @@
 .searchBox {
-  border: 2px solid #d68ac1;
-  padding: 20px;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  max-width: auto;
   margin-bottom: 20px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #666666;
 }
 
 .input {
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 16px;
+  background-color: #666666;
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+.input::placeholder {
+  color: white;
+}
+
+.input:focus {
+  border-color: #4099f8;
+  outline: none;
 }

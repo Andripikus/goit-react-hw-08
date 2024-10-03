@@ -1,43 +1,57 @@
-/* src/components/LoginForm/LoginForm.module.css */
 .form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #666666;
 }
 
 .label {
-    margin-bottom: 10px;
-    font-weight: bold;
+  font-weight: bold;
+  display: block;
+
+  margin-bottom: 5px;
 }
 
-input {
-    padding: 8px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.input {
+  display: block;
+
+  width: 100%;
+
+  background-color: #666666;
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px;
 }
 
-.submitBtn {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.submitBtn:hover {
-    background-color: #45a049;
+.input:focus {
+  border-color: #4099f8;
+  outline: none;
 }
 
 .errorText {
-    color: red;
-    font-size: 12px;
+  color: rgb(244, 59, 59);
+  font-size: 15px;
+  margin-top: 10px;
+  display: block;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #4099f8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
 }

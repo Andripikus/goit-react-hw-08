@@ -14,15 +14,13 @@ export default function Contact({ contact: { name, number, id } }) {
 
   return (
     <div className={css.contactBox}>
-      <div>
-        <div className={css.nameBox}>
-          <IoPerson style={{ width: 20, height: 20 }} />
-          <p>{name}</p>
-        </div>
-        <div className={css.contactData}>
-          <MdPhone style={{ width: 20, height: 20 }} />
-          <p>{number}</p>
-        </div>
+      <div className={css.nameBox}>
+        <IoPerson style={{ width: 20, height: 20 }} />
+        <p>{name}</p>
+      </div>
+      <div className={css.contactData}>
+        <MdPhone style={{ width: 20, height: 20 }} />
+        <p>{number}</p>
       </div>
       <button className={css.btnDelete} onClick={handleDelete}>
         Delete

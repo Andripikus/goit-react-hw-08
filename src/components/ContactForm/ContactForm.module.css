@@ -1,42 +1,55 @@
 .form {
-  border: 2px solid #333;
-  padding: 20px;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  max-width: auto;
   margin-bottom: 20px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #666666;
 }
 
 .label {
   font-weight: bold;
-  margin-bottom: 5px;
   display: block;
+  font-size: 16px;
+  margin-right: 8px;
 }
 
 .input {
-  width: 100%;
+  background-color: #666666;
   padding: 8px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-left: 8px;
 }
 
-.button {
-  display: block;
+.input:focus {
+  border-color: #4099f8;
+  outline: none;
+}
+
+.submitBtn {
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #4099f8;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  margin: 15px auto 0;
+  font-weight: bold;
+  margin-left: auto;
+  width: auto;
+  transition: background-color 0.3s ease;
 }
 
-.button:hover {
-  background-color: #45a049;
+.submitBtn:hover {
+  background-color: #0056b3;
 }
 
-.error {
-  color: red;
-  font-size: 12px;
-  margin-bottom: 10px;
+.errorText {
+  display: flex;
+  color: rgb(244, 59, 59);
+  font-size: 15px;
+  margin-top: 5px;
 }

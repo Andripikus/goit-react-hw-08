@@ -15,7 +15,6 @@ const LoginForm = () => {
     password: "",
   };
 
-  // Валідація форми через Yup
   const loginFormValidationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required!"),
     password: Yup.string()
@@ -28,7 +27,7 @@ const LoginForm = () => {
     dispatch(logIn(values))
       .unwrap()
       .then(() => {
-        actions.resetForm(); // Очищення форми після успішного логіну
+        actions.resetForm();
       })
       .catch((error) => {
         console.error("Login error:", error);
@@ -43,11 +42,12 @@ const LoginForm = () => {
     >
       <Form className={css.form}>
         <label className={css.label}>
-          <span>Email</span>
+          Email
           <Field
             type="text"
             name="email"
             placeholder="test.example@gmail.com"
+            className={css.input}
           />
           <ErrorMessage
             className={css.errorText}
@@ -57,11 +57,12 @@ const LoginForm = () => {
         </label>
 
         <label className={css.label}>
-          <span>Password</span>
+          Password
           <Field
             type="password"
             name="password"
             placeholder="Enter your password"
+            className={css.input}
           />
           <ErrorMessage
             className={css.errorText}
@@ -70,16 +71,18 @@ const LoginForm = () => {
           />
         </label>
 
-        <button className={css.submitBtn} type="submit">
+        <button className={css.btn} type="submit">
           Log In
         </button>
 
         {error && (
-          <p className={css.errorText}>Oops, some error occurred... {error}</p>
+          <div className={css.errorText}>
+            Oops, some error occurred... {error}
+          </div>
         )}
       </Form>
     </Formik>
   );
 };
 
-export default LoginForm; // Експорт за замовчуванням
+export default LoginForm;

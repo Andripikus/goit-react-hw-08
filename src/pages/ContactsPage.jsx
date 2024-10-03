@@ -4,7 +4,7 @@ import ContactList from "../components/ContactList/ContactList";
 import SearchBox from "../components/SearchBox/SearchBox";
 import { fetchContacts } from "../redux/contacts/operations";
 import { useEffect } from "react";
-import { selectContacts, selectLoading, selectError } from "../redux/contacts/selectors";
+import { selectLoading, selectError } from "../redux/contacts/selectors";
 import toast, { Toaster } from "react-hot-toast";
 
 const ContactsPage = () => {
@@ -12,22 +12,25 @@ const ContactsPage = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
-
- useEffect(() => {
-  dispatch(fetchContacts())
-    .unwrap()
-    .then(() => {
-      toast.success("Phonebook loaded successfully!");
-    })
-    .catch((error) => {
-      console.error("Failed to load contacts:", error);
-      toast.error("Failed to load contacts.");
-    });
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchContacts())
+      .unwrap()
+      .then(() => {
+        toast.success("Phonebook loaded successfully!");
+      })
+      .catch((error) => {
+        console.error("Failed to load contacts:", error);
+        toast.error("Failed to load contacts.");
+      });
+  }, [dispatch]);
 
   return (
     <>
-      <h1>Phonebook</h1>
+      <h1
+        style={{ textAlign: "center", fontSize: "32px", marginBottom: "20px" }}
+      >
+        Phonebook
+      </h1>
       {loading && <h2>Loading...</h2>}
       {error && <h2>{error}</h2>}
       <Toaster />

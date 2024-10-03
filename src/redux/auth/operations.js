@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// Налаштування базової URL-адреси для бекенду
 axios.defaults.baseURL = "https://connections-api.goit.global/";
 
 // ** Додаємо JWT до заголовків
@@ -25,7 +24,7 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post("/users/signup", credentials);
       const token = res.data.token;
-      setAuthHeader(token); // Встановлюємо токен після реєстрації
+      setAuthHeader(token);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -44,7 +43,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post("/users/login", credentials);
       const token = res.data.token;
-      setAuthHeader(token); // Встановлюємо токен після логіну
+      setAuthHeader(token);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -60,7 +59,7 @@ export const logIn = createAsyncThunk(
 export const logOut = createAsyncThunk("auth/logOut", async (_, thunkAPI) => {
   try {
     await axios.post("/users/logout");
-    clearAuthHeader(); // Видаляємо токен після логауту
+    clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -77,7 +76,7 @@ export const refreshUser = createAsyncThunk(
     try {
       const state = thunkAPI.getState();
       const token = state.auth.token;
-      setAuthHeader(token); // Встановлюємо токен
+      setAuthHeader(token);
       const resp = await axios.get("/users/current");
       return resp.data;
     } catch (error) {
@@ -87,7 +86,6 @@ export const refreshUser = createAsyncThunk(
   {
     condition: (_, thunkAPI) => {
       const state = thunkAPI.getState();
-      // Якщо токену немає, не робимо запит
       return state.auth.token !== null;
     },
   }
